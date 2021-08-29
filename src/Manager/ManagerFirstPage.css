@@ -1,0 +1,44 @@
+/* button {
+  background-color: rgb(133, 41, 113);
+  color: rgb(245, 238, 243);
+  box-shadow: 10px 10px #888888;
+}
+.row {
+  margin: 10% 0% 0% 10%;
+}
+.first {
+  margin: 5%;
+}
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 50px;
+  grid-template-columns: 1fr 1fr;
+} */
+
+.manager .Headline {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.manager .notnav {
+  background-color: rgb(133, 41, 113);
+  color: rgb(245, 238, 243);
+  box-shadow: 10px 10px #888888;
+  width: 40vw;
+  height: 35vh;
+}
+.manager .row {
+  margin: 10% 0% 0% 10%;
+}
+.manager .first {
+  margin: 5%;
+}
+
+.manager .grid-container {
+  display: grid;
+  grid-column-gap: 20px;
+  grid-row-gap: 50px;
+  grid-template-columns: 1fr 1fr;
+}

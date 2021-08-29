@@ -1,0 +1,115 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+.apply2 .h .labels {
+  float: left;
+}
+
+.apply2 .heading {
+  text-align: center;
+}
+
+.apply2 .buttons {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.apply2 .img {
+  width: 25vw;
+}
+
+.apply2 label {
+  text-transform: capitalize;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.apply2 .add {
+  margin-left: 5vw;
+  margin-top: 50px;
+}
+
+.apply2 .sig {
+  text-align: center;
+}
+
+.apply2 .headline {
+  text-align: center;
+}
+
+.apply2 .form {
+  width: 100%;
+}
+
+.apply2 .container-fluid {
+  align-items: center;
+  background-color: #f0d9e7;
+  border: 2px solid black;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  box-shadow: 0px 8px 16px 0px;
+}
+.apply2 .block2 {
+  width: 300px;
+  height: 200px;
+}
+.apply2 .block11 {
+  width: 200px;
+  height: 200px;
+}
+.apply2 .block12 {
+  width: 250px;
+  height: 50px;
+}
+
+.apply2 #pic1,
+.apply2 #pic {
+  margin-left: 7rem;
+}
+
+@media (max-width: 1000px) {
+  .apply2 div {
+    word-wrap: break-word;
+  }
+
+  .apply2 .add {
+    margin-left: 0vw;
+    margin-top: 50px;
+  }
+
+  .apply2 #pic1,
+  .apply2 #pic {
+    margin-left: 0px;
+  }
+
+  .apply2 .block11 {
+    width: 100px;
+    height: 100px;
+  }
+
+  .apply2 .block12 {
+    width: 7rem;
+  }
+  .apply2 .form {
+    border: 1px solid black;
+    margin: 0;
+  }
+
+  .apply2 label {
+    font-family: Georgia, serif;
+    font-size: 0.7rem;
+  }
+  .apply2 .block2 {
+    margin-left: 1rem;
+    width: 11rem;
+
+    display: none;
+  }
+
+  .apply2 .img {
+    width: 70vw;
+  }
+}

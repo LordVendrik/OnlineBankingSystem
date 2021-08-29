@@ -1,0 +1,89 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+.apply .h .labels {
+  float: left;
+}
+
+.apply .message {
+  text-align: center;
+  color: rgb(9, 226, 9);
+}
+
+.apply label {
+  text-transform: capitalize;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+}
+
+.apply .headline {
+  text-align: center;
+}
+
+.apply .form {
+  width: 100%;
+}
+
+.apply .container-fluid {
+  align-items: center;
+  background-color: #f0d9e7;
+  border: 2px solid black;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  box-shadow: 0px 8px 16px 0px;
+}
+.apply .block2 {
+  width: 300px;
+  height: 200px;
+}
+.apply .block11 {
+  width: 200px;
+  height: 200px;
+}
+.apply .block12 {
+  width: 250px;
+  height: 50px;
+}
+
+.apply #pic1,
+.apply #pic {
+  margin-left: 7rem;
+}
+@media screen and (max-width: 900px) {
+  .apply #pic {
+    margin-left: 0.5rem;
+
+    width: 10rem;
+  }
+  .apply #pic1 {
+    margin-left: auto;
+  }
+
+  .apply .block11 {
+    width: 100px;
+    height: 100px;
+  }
+
+  .apply .block12 {
+    width: 7rem;
+  }
+  .apply .form {
+    border: 1px solid black;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .apply label {
+    font-family: Georgia, serif;
+    font-size: 0.7rem;
+  }
+  .apply .block2 {
+    margin-left: 1rem;
+    width: 11rem;
+
+    display: none;
+  }
+}

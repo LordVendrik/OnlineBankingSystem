@@ -1,0 +1,42 @@
+.Fund sup {
+  color: red;
+}
+.Fund #Balance {
+  color: rgb(112, 151, 34);
+}
+.Fund .btn {
+  background-color: rgb(165, 243, 10);
+  color: white;
+  text-align: center;
+  width: 20%;
+  align-content: center;
+  /* float: right; */
+}
+
+.Fund .message {
+  text-align: center;
+}
+
+.Fund .footer {
+  background-color: paleturquoise;
+  color: rgb(9, 9, 192);
+}
+.Fund header {
+  margin-top: 50px;
+  color: black;
+  text-align: center;
+}
+.Fund .form {
+  margin: 0 5%;
+  padding: 2%;
+}
+
+.Fund .pos4 {
+  width: 30vw;
+  margin: 0px auto 15px auto;
+  padding: 5px 4vw 10px 1vw;
+}
+.Fund .align-right {
+  text-align: right;
+  border: 0;
+}
