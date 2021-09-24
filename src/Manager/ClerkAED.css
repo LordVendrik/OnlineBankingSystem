@@ -1,0 +1,81 @@
+.LoanList .box7 {
+  background: rgb(219, 198, 213);
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 20px;
+  box-shadow: 10px 10px #888888;
+  text-align: center;
+}
+
+/* .box1 {
+    background:rgb(178, 197, 178);
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-top:20px;
+      width:70%;
+      box-shadow: 10px 10px #888888;
+  }
+   */
+/* .table-responsive-sm
+   { 
+       border: 5px;
+      text-align: center;
+      margin: 2px;
+    } */
+
+/* #style
+    {
+      border: 1px solid rgb(44, 40, 40);  
+      padding-top: 20px;
+      padding-bottom: 20px;   
+      background-color: rgb(209, 200, 200);
+      text-align: center;
+    } */
+
+/* #tr{
+      border: 1px solid black;
+      text-align: center;  
+  } */
+
+.LoanList #tr:hover {
+  background-color: rgba(231, 229, 229, 0.719);
+}
+
+.LoanList .btn {
+  width: 130px;
+  padding: 8px 5px;
+  margin: 10px 0 10px 0;
+  font-size: 17px;
+}
+
+@media screen and (max-width: 900px) {
+  .LoanList .border {
+    width: 90%;
+    height: 90%;
+  }
+
+  .LoanList #one {
+    width: 30%;
+    margin: 0;
+  }
+  .LoanList #two {
+    width: 30%;
+    margin: 0;
+  }
+  .LoanList #three {
+    width: 30%;
+    margin: 0;
+  }
+}
+
+.LoanList #one {
+  margin: 5px;
+}
+
+.LoanList #two {
+  margin: 5px;
+}
+
+.LoanList #three {
+  margin: 5px;
+}

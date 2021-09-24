@@ -6,15 +6,33 @@
   float: left;
 }
 
-.apply .message {
+.apply .heading {
   text-align: center;
-  color: rgb(9, 226, 9);
+}
+
+.apply .buttons {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.apply .img {
+  width: 25vw;
 }
 
 .apply label {
   text-transform: capitalize;
   font-family: Georgia, serif;
   font-size: 1rem;
+  font-weight: 800;
+}
+
+.apply .add {
+  margin-left: 5vw;
+  margin-top: 50px;
+}
+
+.apply .sig {
+  text-align: center;
 }
 
 .apply .headline {
@@ -51,14 +69,20 @@
 .apply #pic {
   margin-left: 7rem;
 }
-@media screen and (max-width: 900px) {
-  .apply #pic {
-    margin-left: 0.5rem;
 
-    width: 10rem;
+@media (max-width: 1000px) {
+  .apply div {
+    word-wrap: break-word;
   }
-  .apply #pic1 {
-    margin-left: auto;
+
+  .apply .add {
+    margin-left: 0vw;
+    margin-top: 50px;
+  }
+
+  .apply #pic1,
+  .apply #pic {
+    margin-left: 0px;
   }
 
   .apply .block11 {
@@ -71,9 +95,7 @@
   }
   .apply .form {
     border: 1px solid black;
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 0;
   }
 
   .apply label {
@@ -85,5 +107,9 @@
     width: 11rem;
 
     display: none;
+  }
+
+  .apply .img {
+    width: 70vw;
   }
 }

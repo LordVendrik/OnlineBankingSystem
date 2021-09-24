@@ -1,0 +1,73 @@
+.LoanView .box {
+  background: hsl(0, 29%, 95%);
+  padding: 30px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.LoanView .box4 {
+  background: hsl(0, 29%, 95%);
+  padding: 8px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.LoanView .box2 {
+  background: rgb(124, 184, 124);
+  padding: 30px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.LoanView .box3 {
+  background: hsl(0, 29%, 95%);
+  padding: 30px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.LoanView input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+.LoanView body {
+  margin: 2.5px;
+  background: rgb(124, 184, 124);
+}
+
+.LoanView .pageborder {
+  border: 3px;
+  border-style: solid;
+  border-color: black;
+}
+
+.LoanView .img {
+  width: 25vw;
+}
+
+.LoanView .img2 {
+  width: 10vw;
+}
+
+@media (max-width: 1000px) {
+  .LoanView .img {
+    width: 80vw;
+  }
+
+  .LoanView .img2 {
+    width: 30vw;
+  }
+}
+
+.LoanView .centered {
+  text-align: center;
+}
+
+.LoanView .shadow {
+  text-shadow: 1px 1px #e00b6e;
+}

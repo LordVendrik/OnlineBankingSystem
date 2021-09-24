@@ -56,7 +56,14 @@ export default function ManagerDashboard() {
               </button>
             </div>
             <div className="grid-item">
-              <button type="button" className="btn notnav" value="Submit">
+              <button
+                type="button"
+                className="btn notnav"
+                value="Submit"
+                onClick={() => {
+                  history.push("/ManagerLoanList");
+                }}
+              >
                 <div>
                   <div>
                     <h2>Approve for loan and the credit card</h2>
@@ -93,7 +100,7 @@ export default function ManagerDashboard() {
               <button type="button" className="btn notnav" value="Submit">
                 <div>
                   <div>
-                    <h2> Can create,edit and delete all details of clerk</h2>
+                    <h2>Create,edit and delete all details of clerk</h2>
                   </div>
                   <div>
                     <img
@@ -110,7 +117,7 @@ export default function ManagerDashboard() {
               <button type="button" className="btn notnav" value="Submit">
                 <div>
                   <div>
-                    <h2>Can watch all trasactions of customers</h2>
+                    <h2>Watch trasactions of customers</h2>
                   </div>
                   <div>
                     <img
@@ -127,7 +134,7 @@ export default function ManagerDashboard() {
               <button type="button" className="btn notnav" value="Submit">
                 <div>
                   <div>
-                    <h2>Send a notification to all or particular customer</h2>
+                    <h2>Send notification to all or particular customer</h2>
                   </div>
                   <div>
                     <img

@@ -30,10 +30,16 @@ app.use(require("./rotues/ClerkRoutes/ApproveTransaction"));
 app.use(require("./rotues/ManagerRoutes/FinallyApproveAccount"));
 app.use(require("./rotues/ManagerRoutes/Decline"));
 app.use(require("./rotues/ManagerRoutes/Approve"));
+app.use(require("./rotues/ManagerRoutes/ProductDetails"));
+app.use(require("./rotues/ManagerRoutes/LoanDetails"));
 
 //Customer Routes
 app.use(require("./rotues/CustomerRoutes/TransactionRequest"));
 app.use(require("./rotues/CustomerRoutes/TransactionsList"));
+app.use(require("./rotues/CustomerRoutes/LoanRequest"));
+
+//Products Routes
+app.use(require("./rotues/Products/GetProducts"));
 
 app.listen(5000, () => {
   console.log("listening on port 5000");

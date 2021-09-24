@@ -40,7 +40,7 @@ export default function Sidebar() {
         </a>
         <Link to="/customerDashboard">Dashboard</Link>
         <a href="#b">Watch Transactions History</a>
-        <a href="#c">Apply for load/Cards</a>
+        <Link to="/CustomerLoanRequest">Apply for Loan</Link>
         <Link to="/transferFund">Transfer Money</Link>
         <a href="#b">Notifications</a>
         <a href="#c">Apply For Corrections</a>

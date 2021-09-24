@@ -79,4 +79,21 @@ router.get("/ManagerApprove/:id", requireLogin, checkforManager, (req, res) => {
   );
 });
 
+router.post("/approveLoan/:id", requireLogin, checkforManager, (req, res) => {
+  const id = req.params.id;
+  db.query("Insert into loandetails set ?", req.body, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      db.query(`delete from loandata where LoanId = ${id}`, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json({ message: "success" });
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;

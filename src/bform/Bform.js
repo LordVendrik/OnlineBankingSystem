@@ -64,9 +64,9 @@ export default function Bform() {
           <h1 className="headline">
             <u>APPLICATION FOR NEW ACCOUNT</u>
           </h1>
+          <p>{submitted}</p>
         </header>
         <div className="container-fluid">
-          <p className="message">{submitted}</p>
           <div className="row mt-4">
             <div className="col-xl-6 col-md-12">
               <div className="col-xl-6 col-md-12" id="pic">

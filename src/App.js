@@ -15,6 +15,9 @@ import ApproveAccount from "./Manager/ApproveAccount";
 import FundTransfer from "./Customer/FundTransfer";
 import ApproveTransactions from "./Clerk/ApproveTransactions";
 import ViewDetailedTransactionRequest from "./Clerk/ViewDetailedTransactionRequest";
+import Loan from "./Customer/Loan";
+import ManagerLoanList from "./Manager/ManagerLoanList";
+import LoanView from "./Manager/LoanView";
 
 export const userContext = createContext();
 
@@ -72,6 +75,12 @@ const Routing = () => {
       <Route exact path="/transferFund">
         <FundTransfer />
       </Route>
+      <Route exact path="/CustomerLoanRequest">
+        <Loan />
+      </Route>
+      <Route exact path="/ManagerLoanList">
+        <ManagerLoanList />
+      </Route>
       <Route
         path="/approveAccount/:id"
         component={ViewDetailedRequestClerk}
@@ -84,6 +93,7 @@ const Routing = () => {
         path="/approveTransactions/:id"
         component={ViewDetailedTransactionRequest}
       ></Route>
+      <Route path="/loanDetails/:LoanId" component={LoanView}></Route>
     </Switch>
   );
 };

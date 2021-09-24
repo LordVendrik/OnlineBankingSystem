@@ -38,13 +38,13 @@ export default function Sidebar() {
         >
           ×
         </a>
-        <Link to="/customerDashboard">Dashboard</Link>
-        <a href="#b">Watch Transactions History</a>
-        <a href="#c">Apply for load/Cards</a>
-        <Link to="/transferFund">Transfer Money</Link>
-        <a href="#b">Notifications</a>
-        <a href="#c">Apply For Corrections</a>
-        <a href="#d">Send Query</a>
+        <Link to="/managerDashboard">Dashboard</Link>
+        <Link to="/approveAccountManager">Approve New Accounts</Link>
+        <Link to="/ManagerLoanList">Approve load/Cards Requests</Link>
+        <Link to="/">View/Delete Customer Account</Link>
+        <a href="#b">Create/Edit/Delete Details of clerk</a>
+        <a href="#c">Watch All Transactions</a>
+        <a href="#d">Send Notifications</a>
       </div>
     </div>
   );

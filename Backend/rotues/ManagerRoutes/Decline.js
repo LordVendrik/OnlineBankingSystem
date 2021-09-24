@@ -61,4 +61,17 @@ router.get("/ManagerDecline/:id", requireLogin, checkforManager, (req, res) => {
   );
 });
 
+router.get("/removeRequest/:id", requireLogin, checkforManager, (req, res) => {
+  const id = req.params.id;
+
+  db.query(`delete from loandata where LoanId = '${id}'`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.json({ error: "error" });
+    } else {
+      res.json({ message: "deleted" });
+    }
+  });
+});
+
 module.exports = router;

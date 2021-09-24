@@ -31,6 +31,7 @@ export default function FundTransfer() {
   }, []);
 
   const ReuqestTransfer = () => {
+    const CurrentDate = new Date().getDate();
     date =
       new Date().getFullYear() +
       "-" +
@@ -38,7 +39,7 @@ export default function FundTransfer() {
         ? "0" + (new Date().getMonth() + 1)
         : new Date().getMonth() + 1) +
       "-" +
-      new Date().getDate();
+      (CurrentDate < 10 ? "0" + CurrentDate : CurrentDate);
 
     time = new Date().getHours() + ":" + new Date().getMinutes();
 

@@ -1,0 +1,60 @@
+.Loan .box {
+  background: hsl(0, 29%, 95%);
+  padding: 30px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.Loan .box4 {
+  background: hsl(0, 29%, 95%);
+  padding: 8px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.Loan .box2 {
+  background: rgb(124, 184, 124);
+  padding: 30px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.Loan .box3 {
+  background: hsl(0, 29%, 95%);
+  padding: 30px;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.Loan input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+.Loan body {
+  margin: 2.5px;
+  background: rgb(124, 184, 124);
+}
+
+.Loan button {
+  background-color: rgb(218, 49, 49);
+  color: black;
+  width: 200px;
+  height: 50px;
+  color: white;
+  font-size: 25px;
+}
+
+.Loan .pageborder {
+  border: 3px;
+  border-style: solid;
+  border-color: black;
+}
+
+.Loan .shadow {
+  text-shadow: 1px 1px #e00b6e;
+}

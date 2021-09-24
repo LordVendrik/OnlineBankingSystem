@@ -3,6 +3,7 @@ import "./Approve.css";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Nav from "../NavBar/Nav";
+import Sidebar from "../SideBarManager/Sidebar";
 
 export default function ApproveAccount() {
   const history = useHistory();
@@ -39,6 +40,7 @@ export default function ApproveAccount() {
   return (
     <div>
       <Nav />
+      <Sidebar />
       <div>
         <div
           className="container mt-5"

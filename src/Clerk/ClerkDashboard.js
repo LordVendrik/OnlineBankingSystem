@@ -58,9 +58,7 @@ export default function ClerkDashboard() {
               <button className="btn notnav" type="button" value="Submit">
                 <div>
                   <div>
-                    <h2>
-                      Delete, loan, credit card details of an customer account
-                    </h2>
+                    <h2>Delete product details of a customer account</h2>
                   </div>
                   <div>
                     <img
@@ -77,7 +75,7 @@ export default function ClerkDashboard() {
               <button className="btn notnav" type="button" value="Submit">
                 <div>
                   <div>
-                    <h2>Edit and delete all customers details</h2>
+                    <h2>Edit or delete customers details</h2>
                   </div>
                   <div>
                     <img
@@ -94,7 +92,7 @@ export default function ClerkDashboard() {
               <button className="btn notnav" type="button" value="Submit">
                 <div>
                   <div>
-                    <h2>Clerk can edit of credit bank product</h2>
+                    <h2>Edit details of bank product</h2>
                   </div>
                   <div>
                     <img
@@ -118,7 +116,7 @@ export default function ClerkDashboard() {
               >
                 <div>
                   <div>
-                    <h2>Approve all the customers trasaction</h2>
+                    <h2>Approve customers trasactions</h2>
                   </div>
                   <div>
                     <img
@@ -135,7 +133,7 @@ export default function ClerkDashboard() {
               <button className="btn notnav" type="button" value="Submit">
                 <div>
                   <div>
-                    <h2>Respond to the all customers queries ?</h2>
+                    <h2>Respond to the customer queries </h2>
                   </div>
                   <div>
                     <img
