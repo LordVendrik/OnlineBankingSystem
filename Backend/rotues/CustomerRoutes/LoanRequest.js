@@ -3,41 +3,57 @@ const router = express.Router();
 const requirelogin = require("../../middlewares/requireLogin");
 const checkforCustomer = require("../../middlewares/checkforCustomer");
 const db = require("../DBConnection/Connection");
+const multer = require("multer");
+const path = require("path");
 
-router.post("/cheks", requirelogin, checkforCustomer, (req, res) => {
-  console.log(req.body);
-
-  const data = {
-    LoanType: req.body.LoanType,
-    AccountType: req.body.AccountType,
-    firstName: req.body.firstName,
-    Middlename: req.body.Middlename,
-    Lastname: req.body.Lastname,
-    DOB: req.body.DOB,
-    Emailid: req.body.Emailid,
-    Mobileno: req.body.Mobileno,
-    Aadhaarno: req.body.Aadhaarno,
-    Pancardno: req.body.Pancardno,
-    Address: req.body.Address,
-    City: req.body.City,
-    State: req.body.State,
-    Pincode: req.body.Pincode,
-    Incomesource: req.body.Incomesource,
-    Annualincome: req.body.Annualincome,
-    Wantloan: req.body.Wantloan,
-    Howlong: req.body.Howlong,
-    accountno: req.body.accountno,
-    productType: req.body.productType,
-  };
-
-  db.query("insert into loanData set ?", data, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("done" + result);
-      res.json({ r: result });
-    }
-  });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../../uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        req.body.Username +
+        "-" +
+        req.body.datetime +
+        path.extname(file.originalname)
+    );
+  },
 });
+
+var upload = multer({ storage: storage });
+
+router.post(
+  "/cheks",
+  requirelogin,
+  checkforCustomer,
+  upload.single("incomeproofphoto"),
+  (req, res) => {
+    console.log(req.body);
+
+    const data = {
+      LoanType: req.body.LoanType,
+      Emailid: req.body.Emailid,
+      Annualincome: req.body.Annualincome,
+      incomeproofphoto:
+        "incomeproofphoto-" + req.body.Username + "-" + req.body.datetime,
+      Incomesource: req.body.Incomesource,
+      loanamount: req.body.Wantloan,
+      accountno: req.body.accountno,
+      timeRemaining: req.body.timeRemaining,
+    };
+
+    db.query("insert into loanData set ?", data, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("done" + result);
+        res.json({ message: "successfull" });
+      }
+    });
+  }
+);
 
 module.exports = router;

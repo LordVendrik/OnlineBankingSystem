@@ -1,0 +1,54 @@
+.ViewDetailedRequest form * {
+  color: white;
+  border-radius: 0 !important;
+}
+
+.ViewDetailedRequest form > fieldset > legend {
+  font-size: 120%;
+}
+.ViewDetailedRequest .block11 {
+  width: 175px;
+  height: 175px;
+}
+
+.ViewDetailedRequest .form {
+  background-color: #ffffff;
+  border: 1px solid black;
+  margin: 0px auto;
+  font-family: Raleway;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.ViewDetailedRequest .block12 {
+  width: 250px;
+  height: 50px;
+}
+
+.ViewDetailedRequest .centered {
+  text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+  .ViewDetailedRequest .block12 {
+    margin-right: 2rem;
+    width: 7rem;
+  }
+
+  .ViewDetailedRequest .form {
+    border: 1px solid black;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .ViewDetailedRequest .block11 {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.ViewDetailedRequest textarea {
+  margin: 0;
+  padding: 0;
+}

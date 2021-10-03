@@ -3,13 +3,15 @@ const router = express.Router();
 const db = require("../DBConnection/Connection");
 const requireLogin = require("../../middlewares/requireLogin");
 const checkforClerk = require("../../middlewares/checkforClerk");
+const transporter = require("../auth/CredentialsForMail");
 
 router.get(
-  "/approveTransactionSame/:id",
+  "/approveTransactionSame/:id/:Emailid",
   requireLogin,
   checkforClerk,
   (req, res) => {
     const id = req.params.id;
+    const email = req.params.Emailid;
     db.query(
       `select * from transferrequest where transaction_id = ${id}`,
       (err, result) => {
@@ -58,7 +60,21 @@ router.get(
                         if (err) {
                           return res.json({ error: err });
                         } else {
-                          return res.json({ message: r });
+                          var mailOptions = {
+                            from: "sidhant.seraphic@gmail.com",
+                            to: email,
+                            subject: "Transaction Request Approved",
+                            text: `Your Transaction request is Approved`,
+                          };
+
+                          transporter.sendMail(mailOptions, (err, info) => {
+                            if (err) {
+                              console.log(err);
+                            } else {
+                              console.log(info);
+                              res.json({ message: r });
+                            }
+                          });
                         }
                       }
                     );

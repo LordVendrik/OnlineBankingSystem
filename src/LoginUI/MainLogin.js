@@ -14,7 +14,7 @@ export default function MainLogin() {
             <div className="col-md-6 col-sm-12 cn">
               <div className="tag">
                 <p>
-                  21 DIN M PAISA <br /> DOUBLE KRNE KA <br /> WADA
+                  The Bank <br /> You Can Absolutly <br /> Trust
                 </p>
               </div>
             </div>

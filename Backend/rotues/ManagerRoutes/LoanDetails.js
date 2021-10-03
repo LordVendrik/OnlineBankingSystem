@@ -12,13 +12,13 @@ router.get("/loanDetails/:id", requireLogin, checkforManager, (req, res) => {
       console.log(err);
     } else {
       db.query(
-        `select * from product where productid = ${result[0].LoanType}`,
+        `select * from product where productType = '${result[0].LoanType}'`,
         (err, result2) => {
           if (err) {
             console.log(err);
           } else {
             db.query(
-              `select photo,adharcardPhoto,signaturephoto from customeraccounts where Accountno=${result[0].accountno}`,
+              `select * from customeraccounts where Accountno=${result[0].accountno}`,
               (err, result3) => {
                 if (err) {
                   console.log(err);

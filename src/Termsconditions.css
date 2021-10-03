@@ -1,0 +1,17 @@
+.terms .card {
+  background: rgb(62, 139, 139);
+}
+
+.terms .btn {
+  width: 130px;
+  padding: 8px 5px;
+  margin-left: 330px;
+  font-size: 20px;
+}
+
+.terms .bodycolor {
+  background: rgb(209, 212, 211);
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTho8A-u4aiufOZLDA2Hkufssdi8bHQ4v3LFg&usqp=CAU);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}

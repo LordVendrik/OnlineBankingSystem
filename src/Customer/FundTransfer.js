@@ -7,10 +7,10 @@ import "./fundtransfer.css";
 import { userContext } from "../App";
 
 export default function FundTransfer() {
-  const [transactionDetails, settransactionDetails] = useState({
-    BankType: "same",
-  });
+  const [transactionDetails, settransactionDetails] = useState({});
   const { state } = useContext(userContext);
+  const [success, setsuccess] = useState("");
+  const [style, setstyle] = useState("");
   const history = useHistory();
   const [message, setmessage] = useState("");
   let date;
@@ -30,8 +30,45 @@ export default function FundTransfer() {
       });
   }, []);
 
+  const transferValidations = () => {
+    for (let i = 1; i < 7; i++) {
+      if (document.getElementById(`field${i}`).value == "") {
+        document.getElementById(`field${i}`).style.border = "2px solid red";
+        document.getElementById(`field${i}`).scrollIntoView();
+        return false;
+      } else {
+        document.getElementById(`field${i}`).style.border = "";
+      }
+    }
+
+    if (
+      document.getElementById("field2").value !==
+      document.getElementById("field3").value
+    ) {
+      document.getElementById(`field2`).style.border = "2px solid red";
+      document.getElementById(`field3`).style.border = "2px solid red";
+      alert("Please fill same ACcount Number");
+      return false;
+    } else {
+      document.getElementById(`field2`).style.border = "";
+      document.getElementById(`field3`).style.border = "";
+    }
+
+    if (document.getElementById("field4").value >= state.Amount) {
+      document.getElementById(`field4`).style.border = "2px solid red";
+      alert("Amount Exceeded Current Available Amount");
+      return false;
+    } else {
+      document.getElementById(`field4`).style.border = "";
+    }
+
+    return true;
+  };
+
   const ReuqestTransfer = () => {
     const CurrentDate = new Date().getDate();
+    const CurrentMinutes = new Date().getMinutes();
+    const CurrentHour = new Date().getHours();
     date =
       new Date().getFullYear() +
       "-" +
@@ -41,7 +78,21 @@ export default function FundTransfer() {
       "-" +
       (CurrentDate < 10 ? "0" + CurrentDate : CurrentDate);
 
-    time = new Date().getHours() + ":" + new Date().getMinutes();
+    time =
+      (CurrentHour < 10 ? "0" + CurrentHour : CurrentHour) +
+      ":" +
+      (CurrentMinutes < 10 ? "0" + CurrentMinutes : CurrentMinutes);
+
+    if (!transferValidations()) {
+      return;
+    }
+
+    console.log({
+      ...transactionDetails,
+      date: date,
+      time: time,
+      transferfrom: state.Accountno,
+    });
 
     fetch("/transactionRequest", {
       method: "post",
@@ -60,10 +111,18 @@ export default function FundTransfer() {
       .then((data) => {
         if (data.error) {
           console.log(data.error);
-          setmessage("error");
+          setmessage(data.error);
+          setsuccess(
+            "https://thumbs.dreamstime.com/b/flat-raster-wrong-icon-symbol-isolated-white-background-168810889.jpg"
+          );
+          setstyle("text-danger");
         } else {
           console.log(data.message);
           setmessage("successful");
+          setsuccess(
+            "https://thumbs.dreamstime.com/b/tick-mark-icon-flat-illustration-check-mark-vector-tick-mark-icon-flat-illustration-check-mark-vector-164317151.jpg"
+          );
+          setstyle("text-success");
         }
 
         window.scrollTo(0, 0);
@@ -72,6 +131,35 @@ export default function FundTransfer() {
 
   return (
     <div>
+      <div>
+        {message === "" ? (
+          <div></div>
+        ) : (
+          <div className="filter">
+            <div className="modal2 redirectbutton">
+              <div className="modal-content">
+                <div>
+                  <img src={success} width="100px"></img>
+                </div>
+                <div className="modal-body">
+                  <p className={style}>{message ? message : ""}</p>
+                </div>
+                <div className="redirectbutton">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      history.push("/customerDashboard");
+                    }}
+                  >
+                    Redirect TO Dashboard
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
       <Nav />
       <Sidebar />
       <div className="Fund">
@@ -122,6 +210,7 @@ export default function FundTransfer() {
                     type="text"
                     placeholder="Enter the Beneficiary Name"
                     name="Beneficiary Name"
+                    id="field1"
                     required
                     onChange={(e) => {
                       settransactionDetails({
@@ -137,7 +226,7 @@ export default function FundTransfer() {
                       Available Balance :<span id="Balance"></span>
                     </b>
                   </label>
-                  <p>{state ? state.Amount : "loading"}</p>
+                  <p id="amount">{state ? state.Amount : "loading"}</p>
                 </div>
               </div>
 
@@ -150,7 +239,7 @@ export default function FundTransfer() {
                   </label>
                   <input
                     className="pos4"
-                    type="text"
+                    type="number"
                     placeholder="Beneficiary Account Number"
                     name="Beneficiary Account Number"
                     required
@@ -160,6 +249,7 @@ export default function FundTransfer() {
                         beneficiaryaccountnumber: e.target.value,
                       });
                     }}
+                    id="field2"
                   />
                 </div>
 
@@ -171,7 +261,7 @@ export default function FundTransfer() {
                   </label>
                   <input
                     className="pos4"
-                    type="text"
+                    type="number"
                     placeholder="Enter the Beneficiary Account Number"
                     name="Beneficiary Account Number"
                     required
@@ -181,6 +271,7 @@ export default function FundTransfer() {
                         Confirmbeneficiaryaccountnumber: e.target.value,
                       });
                     }}
+                    id="field3"
                   />
                 </div>
               </div>
@@ -207,6 +298,7 @@ export default function FundTransfer() {
                         amount: e.target.value,
                       });
                     }}
+                    id="field4"
                   />
                 </div>
                 <div className="col-xs-12 col-md-6 col-lg-6">
@@ -228,6 +320,7 @@ export default function FundTransfer() {
                         beneficiaryifsccode: e.target.value,
                       });
                     }}
+                    id="field5"
                   />
                 </div>
               </div>
@@ -248,27 +341,8 @@ export default function FundTransfer() {
                           remarks: e.target.value,
                         });
                       }}
+                      id="field6"
                     />
-                  </div>
-                </div>
-                <div className="col-xs-12 col-md-6 col-lg-6">
-                  <div>
-                    <label htmlFor="remarks">
-                      <b>Same Bank or Different :</b>
-                    </label>{" "}
-                    <br />
-                    <select
-                      className="pos4"
-                      onChange={(e) => {
-                        settransactionDetails({
-                          ...transactionDetails,
-                          BankType: e.target.value,
-                        });
-                      }}
-                    >
-                      <option value="same">Same</option>
-                      <option value="diff">Different</option>
-                    </select>
                   </div>
                 </div>
               </div>

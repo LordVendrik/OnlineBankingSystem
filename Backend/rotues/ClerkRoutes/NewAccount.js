@@ -13,7 +13,12 @@ var storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(
       null,
-      file.fieldname + "-" + req.body.AadharNo + path.extname(file.originalname)
+      file.fieldname +
+        "-" +
+        req.body.AadharNo +
+        "-" +
+        req.body.Username +
+        path.extname(file.originalname)
     );
   },
 });
@@ -40,9 +45,11 @@ router.post(
       Colony: req.body.Colony,
       Houseno: req.body.Houseno,
       District: req.body.District,
-      photo: "photo-" + req.body.AadharNo + ".jpg",
-      adharcardphoto: "adhar-" + req.body.AadharNo + ".jpg",
-      signaturephoto: "signature-" + req.body.AadharNo + ".jpg",
+      photo: "photo-" + req.body.AadharNo + "-" + req.body.Username + ".jpg",
+      adharcardphoto:
+        "adhar-" + req.body.AadharNo + "-" + req.body.Username + ".jpg",
+      signaturephoto:
+        "signature-" + req.body.AadharNo + "-" + req.body.Username + ".jpg",
       password: req.body.Password,
       DOB: req.body.DOB,
       initialAmount: req.body.intialAmount,
@@ -55,7 +62,10 @@ router.post(
         if (err) {
           res.json({ error: err });
         } else {
-          res.json({ message: result });
+          res.json({
+            message:
+              "Application submitted!!! account creation in process we will send you mail after creation of account",
+          });
         }
       }
     );

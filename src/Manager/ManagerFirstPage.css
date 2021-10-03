@@ -17,11 +17,35 @@
   grid-template-columns: 1fr 1fr;
 } */
 
+.manager .board {
+  width: 300px;
+  height: 20vh;
+  color: #3f3f3f;
+  box-shadow: 1px 1px #888888;
+  border-radius: 10px;
+}
+
+.manager .values {
+  margin-top: 15%;
+  font-size: 2rem;
+  text-align: right;
+  color: black;
+}
+
+.mDash .chart {
+  width: 50%;
+  text-align: center;
+}
+
+.manager .row {
+  margin: auto;
+}
+
 .manager .Headline {
   margin-top: 50px;
   text-align: center;
 }
-
+/*
 .manager .notnav {
   background-color: rgb(133, 41, 113);
   color: rgb(245, 238, 243);
@@ -41,4 +65,4 @@
   grid-column-gap: 20px;
   grid-row-gap: 50px;
   grid-template-columns: 1fr 1fr;
-}
+} */

@@ -5,73 +5,140 @@ const requireLogin = require("../../middlewares/requireLogin");
 const checkforManager = require("../../middlewares/checkforManager");
 const fs = require("fs");
 const path = require("path");
+const transporter = require("../auth/CredentialsForMail");
 
-router.get("/ManagerDecline/:id", requireLogin, checkforManager, (req, res) => {
-  const id = req.params.id;
+router.get(
+  "/ManagerDecline/:id/:reason",
+  requireLogin,
+  checkforManager,
+  (req, res) => {
+    const id = req.params.id;
+    const reason = req.params.reason;
 
-  db.query(
-    `select photo,adharcardPhoto,signaturephoto from newaccountrequestmanager where request_id = ${id}`,
-    (err, data) => {
+    db.query(
+      `select photo,adharcardPhoto,signaturephoto,Emailid from newaccountrequestmanager where request_id = ${id}`,
+      (err, data) => {
+        if (err) {
+          return res.json({ error: err });
+        } else {
+          const email = data[0].Emailid;
+
+          const photopath = path.join(
+            __dirname,
+            `../../uploads/${data[0].photo}`
+          );
+          const adharpath = path.join(
+            __dirname,
+            `../../uploads/${data[0].adharcardPhoto}`
+          );
+          const signaturepath = path.join(
+            __dirname,
+            `../../uploads/${data[0].signaturephoto}`
+          );
+
+          fs.unlink(photopath, (err) => {
+            if (err) {
+              return res.json({ error: err });
+            }
+          });
+
+          fs.unlink(adharpath, (err) => {
+            if (err) {
+              return res.json({ error: err });
+            }
+          });
+
+          fs.unlink(signaturepath, (err) => {
+            if (err) {
+              return res.json({ error: err });
+            }
+          });
+
+          db.query(
+            `delete from newaccountrequestmanager where request_id = ${id}`,
+            (err, result) => {
+              if (err) {
+                res.json({ error: err });
+              } else {
+                var mailOptions = {
+                  from: "sidhant.seraphic@gmail.com",
+                  to: email,
+                  subject: "Account Request Declined",
+                  text: `Your Account request is declined 
+                          Reason is : ${reason}`,
+                };
+
+                transporter.sendMail(mailOptions, (err, info) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log(info);
+                    res.json({ message: result });
+                  }
+                });
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+);
+
+router.get(
+  "/removeRequest/:id/:Emailid/:reason",
+  requireLogin,
+  checkforManager,
+  (req, res) => {
+    const id = req.params.id;
+    const email = req.params.Emailid;
+    const reason = req.params.reason;
+
+    db.query(`select * from loandata where LoanId=${id}`, (err, data) => {
       if (err) {
-        return res.json({ error: err });
+        console.log(err);
       } else {
-        const photopath = path.join(
+        const incomeproof = path.join(
           __dirname,
-          `../../uploads/${data[0].photo}`
-        );
-        const adharpath = path.join(
-          __dirname,
-          `../../uploads/${data[0].adharcardPhoto}`
-        );
-        const signaturepath = path.join(
-          __dirname,
-          `../../uploads/${data[0].signaturephoto}`
+          `../../uploads/${data[0].incomeproofphoto + ".jpg"}`
         );
 
-        fs.unlink(photopath, (err) => {
+        fs.unlink(incomeproof, (err) => {
           if (err) {
-            return res.json({ error: err });
-          }
-        });
-
-        fs.unlink(adharpath, (err) => {
-          if (err) {
-            return res.json({ error: err });
-          }
-        });
-
-        fs.unlink(signaturepath, (err) => {
-          if (err) {
+            console.log(err);
             return res.json({ error: err });
           }
         });
 
         db.query(
-          `delete from newaccountrequestmanager where request_id = ${id}`,
+          `delete from loandata where LoanId = '${id}'`,
           (err, result) => {
             if (err) {
-              res.json({ error: err });
+              console.log(err);
+              res.json({ error: "error" });
             } else {
-              res.json({ message: result });
+              var mailOptions = {
+                from: "sidhant.seraphic@gmail.com",
+                to: email,
+                subject: "Loan Request Declined",
+                text: `Your Loan request is declined 
+                    Reason is : ${reason}`,
+              };
+
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log(info);
+                  res.json({ message: "deleted" });
+                }
+              });
             }
           }
         );
       }
-    }
-  );
-});
-
-router.get("/removeRequest/:id", requireLogin, checkforManager, (req, res) => {
-  const id = req.params.id;
-
-  db.query(`delete from loandata where LoanId = '${id}'`, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.json({ error: "error" });
-    } else {
-      res.json({ message: "deleted" });
-    }
-  });
-});
+    });
+  }
+);
 
 module.exports = router;

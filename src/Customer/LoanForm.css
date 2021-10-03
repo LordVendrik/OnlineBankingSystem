@@ -1,0 +1,58 @@
+form * {
+    color: rgb(160, 158, 158);
+    border-radius:0 !important;
+  
+}
+
+form > fieldset > legend {
+    font-size:120%;
+}
+ .block11 {
+    width: 175px;
+    height: 175px;
+  }
+
+.form {
+    background-color: #ffffff;
+    border:1px solid black;
+    margin: 0px auto;
+    font-family: Raleway;
+    padding: 40px;
+    border-radius: 10px
+}
+
+
+.block12 {
+    width: 250px;
+    height: 50px;
+  }
+
+  @media screen and (max-width: 900px) {
+
+    .block12 {
+        margin-right: 2rem;
+        width: 7rem;
+      }
+      
+
+       .form {
+        border: 1px solid black;
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+      }
+    
+      
+      
+      .block11 {
+        width: 100px;
+        height: 100px;
+      }
+
+  }
+  .setimg{
+     
+    background-repeat: no-repeat;
+    background-size:100%;
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlqcFcIcxnm476TibbkSY0Dv8McObC7uqRrg&usqp=CAU);
+  }

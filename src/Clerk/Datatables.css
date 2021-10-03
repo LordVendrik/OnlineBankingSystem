@@ -1,0 +1,18 @@
+.QuerryClerk table {
+  width: 100%;
+}
+.QuerryClerk #example_filter {
+  float: right;
+}
+.QuerryClerk #example_paginate {
+  float: right;
+}
+.QuerryClerk label {
+  display: inline-flex;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.QuerryClerk tr:hover {
+  background-color: #fef1e6;
+}

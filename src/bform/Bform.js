@@ -9,52 +9,198 @@ export default function Bform() {
   const [pic2, setpics3] = useState(null);
   const [submitted, setsubmitted] = useState("");
 
-  const showData = () => {
-    const data = new FormData();
-    const details = Object.entries(formData);
-    for (let i = 0; i < details.length; i++) {
-      if (
-        details[i][0] !== "photo" &&
-        details[i][0] !== "adhar" &&
-        details[i][0] !== "signature"
-      ) {
-        data.append(details[i][0], details[i][1]);
+  const validation = (details) => {
+    let isError = false;
+
+    for (let i = 2; i < 18; i++) {
+      if (document.getElementById(`field${i}`).value === "") {
+        document.getElementById(`field${i}`).style.border = "2px solid red";
+        document.getElementById(`field${i}`).scrollIntoView();
+        isError = true;
+      } else {
+        document.getElementById(`field${i}`).style.border = "";
       }
     }
 
-    data.append("photo", formData.photo);
-    data.append("adhar", formData.adhar);
-    data.append("signature", formData.signature);
+    for (let i = 1; i < 4; i++) {
+      if (document.getElementById(`photo${i}`).value === "") {
+        document.getElementById(`photo${i}`).style.border = "2px solid red";
+        document.getElementById(`photo${i}`).scrollIntoView();
+        isError = true;
+      } else {
+        document.getElementById(`photo${i}`).style.border = "";
+      }
+    }
 
-    console.log(formData);
+    if (document.getElementById("field5").value.length < 8) {
+      document.getElementById("field5").style.border = "2px solid red";
+      document.getElementById("field5").scrollIntoView();
+      alert("Password should be greater than 8 digits");
+      return false;
+    } else {
+      document.getElementById("field5").style.border = "";
+    }
 
-    fetch("/application", {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          window.scrollTo(0, 0);
-          setsubmitted("Application submitted");
-        }
-      });
+    if (document.getElementById("field7").value.length !== 10) {
+      document.getElementById("field7").style.border = "2px solid red";
+      document.getElementById("field7").scrollIntoView();
+      alert("Mobile no should be 10 number long and without 0 at start");
+      return false;
+    } else {
+      document.getElementById("field7").style.border = "";
+    }
+
+    if (document.getElementById("field8").value.length !== 10) {
+      document.getElementById("field8").style.border = "2px solid red";
+      document.getElementById("field8").scrollIntoView();
+      alert(
+        "Alternate Mobile no should be 10 number long and without 0 at start"
+      );
+      return false;
+    } else {
+      document.getElementById("field8").style.border = "";
+    }
+
+    if (document.getElementById("field10").value.length !== 12) {
+      document.getElementById("field10").style.border = "2px solid red";
+      document.getElementById("field10").scrollIntoView();
+      alert("Aadhar should be 12 number long");
+      return false;
+    } else {
+      document.getElementById("field10").style.border = "";
+    }
+
+    if (document.getElementById("field11").value.length !== 10) {
+      document.getElementById("field11").style.border = "2px solid red";
+      document.getElementById("field11").scrollIntoView();
+      alert("PanNo should be 10 characters long");
+      return false;
+    } else {
+      document.getElementById("field11").style.border = "";
+    }
+
+    if (document.getElementById("field6").value) {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!re.test(document.getElementById("field6").value)) {
+        document.getElementById("field6").style.border = "2px solid red";
+        document.getElementById("field6").scrollIntoView();
+        alert("Enter Valid EMail");
+        return false;
+      } else {
+        document.getElementById("field6").style.border = "";
+      }
+    }
+
+    if (document.getElementById("field17").value.length !== 6) {
+      document.getElementById("field17").style.border = "2px solid red";
+      document.getElementById("field17").scrollIntoView();
+      alert("Pincode should be 6 numbers long");
+      return false;
+    } else {
+      document.getElementById("field17").style.border = "";
+    }
+
+    if (!document.getElementById("declaration").checked) {
+      document.getElementById("declaration").parentElement.style.border =
+        "2px solid red";
+      document.getElementById("declaration").scrollIntoView();
+      isError = true;
+    } else {
+      document.getElementById("declaration").parentElement.style.border = "";
+    }
+
+    if (isError) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const showData = () => {
+    const data = new FormData();
+    const details = Object.entries(formData);
+
+    if (!validation()) {
+      return;
+    }
+
+    console.log("proceed");
+
+    // for (let i = 0; i < details.length; i++) {
+    //   if (
+    //     details[i][0] !== "photo" &&
+    //     details[i][0] !== "adhar" &&
+    //     details[i][0] !== "signature"
+    //   ) {
+    //     data.append(details[i][0], details[i][1]);
+    //   }
+    // }
+
+    // data.append("photo", formData.photo);
+    // data.append("adhar", formData.adhar);
+    // data.append("signature", formData.signature);
+
+    // console.log(formData);
+
+    // fetch("/application", {
+    //   method: "post",
+    //   body: data,
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.error) {
+    //       console.log(data.error);
+    //     } else {
+    //       window.scrollTo(0, 0);
+    //       setsubmitted("Application submitted");
+    //     }
+    //   });
   };
 
   const onchangepic = (e) => {
-    setpic(URL.createObjectURL(e.target.files[0]));
-    setformData({ ...formData, photo: e.target.files[0] });
+    const size = e.target.files[0].size;
+    const extension = e.target.files[0].name.split(".");
+
+    if (size < 200000 && extension[1] === "jpg") {
+      setpic(URL.createObjectURL(e.target.files[0]));
+      setformData({ ...formData, photo: e.target.files[0] });
+    } else {
+      setpic("");
+      setformData({ ...formData, photo: "" });
+      alert("Image Should be less than 200kb and format should be jpg");
+      document.getElementById("photo1").value = "";
+    }
   };
 
   const onchangepic2 = (e) => {
-    setpics2(URL.createObjectURL(e.target.files[0]));
-    setformData({ ...formData, adhar: e.target.files[0] });
+    const size = e.target.files[0].size;
+    const extension = e.target.files[0].name.split(".");
+    console.log(size + extension);
+    if (size < 400000 && (extension[1] === "jpg" || extension[1] === "JPG")) {
+      setpics2(URL.createObjectURL(e.target.files[0]));
+      setformData({ ...formData, adhar: e.target.files[0] });
+    } else {
+      setpics2("");
+      setformData({ ...formData, adhar: "" });
+      alert("Adhar Image Should be less than 400kb and format should be jpg");
+      document.getElementById("photo2").value = "";
+    }
   };
   const onchangepic3 = (e) => {
-    setpics3(URL.createObjectURL(e.target.files[0]));
-    setformData({ ...formData, signature: e.target.files[0] });
+    const size = e.target.files[0].size;
+    const extension = e.target.files[0].name.split(".");
+
+    if (size < 200000 && extension[1] === "jpg") {
+      setpics3(URL.createObjectURL(e.target.files[0]));
+      setformData({ ...formData, signature: e.target.files[0] });
+    } else {
+      setpics3("");
+      setformData({ ...formData, signature: "" });
+      alert("Image Should be less than 200kb and format should be jpg");
+      document.getElementById("photo3").value = "";
+    }
   };
 
   return (
@@ -77,6 +223,7 @@ export default function Bform() {
 
                 <input
                   type="file"
+                  id="photo1"
                   onChange={onchangepic}
                   className="doc1"
                   name="uplode"
@@ -95,6 +242,7 @@ export default function Bform() {
 
                 <input
                   type="file"
+                  id="photo2"
                   onChange={onchangepic2}
                   className="doc1"
                   accept="image/*"
@@ -118,10 +266,6 @@ export default function Bform() {
                       setformData({ ...formData, AccountType: e.target.value });
                     }}
                   >
-                    <option defaultValue value="">
-                      {" "}
-                      select
-                    </option>
                     <option value="saving">Saving</option>
                     <option value="Current">Current</option>
                   </select>
@@ -142,6 +286,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, firstName: e.target.value });
                   }}
+                  id="field2"
                 ></input>
               </div>
               <div className="row">
@@ -156,6 +301,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, lastName: e.target.value });
                   }}
+                  id="field3"
                 ></input>
               </div>
               <div className="row">
@@ -170,6 +316,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Username: e.target.value });
                   }}
+                  id="field4"
                 ></input>
               </div>
               <div className="row">
@@ -184,6 +331,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Password: e.target.value });
                   }}
+                  id="field5"
                 ></input>
               </div>
               <div className="row">
@@ -193,11 +341,12 @@ export default function Bform() {
               </div>
               <div className="row">
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   onChange={(e) => {
                     setformData({ ...formData, EmailId: e.target.value });
                   }}
+                  id="field6"
                 ></input>
               </div>
               <div className="row">
@@ -212,6 +361,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Phoneno: e.target.value });
                   }}
+                  id="field7"
                 ></input>
               </div>
               <div className="row">
@@ -229,6 +379,7 @@ export default function Bform() {
                       AlternativePhone: e.target.value,
                     });
                   }}
+                  id="field8"
                 ></input>
               </div>
               <div className="row">
@@ -244,6 +395,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, DOB: e.target.value });
                   }}
+                  id="field9"
                 ></input>
               </div>
               <div className="row">
@@ -259,6 +411,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, AadharNo: e.target.value });
                   }}
+                  id="field10"
                 ></input>
               </div>
               <div className="row">
@@ -273,6 +426,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Pancard: e.target.value });
                   }}
+                  id="field11"
                 ></input>
               </div>
               <div className="row">
@@ -287,6 +441,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, intialAmount: e.target.value });
                   }}
+                  id="field12"
                 ></input>
               </div>
               <div className="row">
@@ -301,9 +456,6 @@ export default function Bform() {
                     setformData({ ...formData, Gender: e.target.value });
                   }}
                 >
-                  <option defaultValue value="">
-                    select
-                  </option>
                   <option value="male">Male</option>
                   <option value="Female">Female</option>
                   <option value="others">Others</option>
@@ -332,6 +484,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Houseno: e.target.value });
                   }}
+                  id="field13"
                 ></input>
               </div>
               <div className="row">
@@ -346,6 +499,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Colony: e.target.value });
                   }}
+                  id="field14"
                 ></input>
               </div>
             </div>
@@ -363,6 +517,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, District: e.target.value });
                   }}
+                  id="field15"
                 ></input>
               </div>
               <div className="row">
@@ -377,6 +532,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, State: e.target.value });
                   }}
+                  id="field16"
                 ></input>
               </div>
               <div className="row">
@@ -391,6 +547,7 @@ export default function Bform() {
                   onChange={(e) => {
                     setformData({ ...formData, Pincode: e.target.value });
                   }}
+                  id="field17"
                 ></input>
               </div>
             </div>
@@ -401,7 +558,11 @@ export default function Bform() {
             <div className="col-xl-6 col-md-12">
               <div className="row">
                 <div className="col">
-                  <input style={{ float: "left" }} type="checkbox"></input>
+                  <input
+                    style={{ float: "left" }}
+                    type="checkbox"
+                    id="declaration"
+                  ></input>
                   <label style={{ float: "left" }}>Declaration:</label>
                 </div>
               </div>
@@ -423,6 +584,7 @@ export default function Bform() {
 
               <input
                 type="file"
+                id="photo3"
                 onChange={onchangepic3}
                 className="doc1"
                 name="uplode"

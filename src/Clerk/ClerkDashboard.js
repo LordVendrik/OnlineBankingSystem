@@ -3,6 +3,7 @@ import "./clerk.css";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import Nav from "../NavBar/Nav";
+import Sidebar from "../SideBarCLerk/Sidebar";
 
 export default function ClerkDashboard() {
   const history = useHistory();
@@ -21,14 +22,38 @@ export default function ClerkDashboard() {
       });
   }, []);
 
+  const runLoanCheck = () => {
+    fetch("/checkLoan", { method: "get" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+          alert("unsuccessfull");
+        } else {
+          alert("successfull");
+        }
+      });
+  };
+
   return (
     <div>
       <Nav />
+      <Sidebar />
       <div className="clerk">
         <div className="Headline">
           <h1>Clerk Dashboard </h1>
         </div>
         <div className="first">
+          <div>
+            <button
+              className="btn btn-primary my-2"
+              onClick={() => {
+                runLoanCheck();
+              }}
+            >
+              Simulate a Month
+            </button>
+          </div>
           <div className="grid-container">
             <div className="grid-item">
               <button
@@ -54,28 +79,19 @@ export default function ClerkDashboard() {
                 </div>
               </button>
             </div>
+
             <div className="grid-item">
-              <button className="btn notnav" type="button" value="Submit">
+              <button
+                className="btn notnav"
+                type="button"
+                value="Submit"
+                onClick={() => {
+                  history.push("/editProduct");
+                }}
+              >
                 <div>
                   <div>
-                    <h2>Delete product details of a customer account</h2>
-                  </div>
-                  <div>
-                    <img
-                      src="https://thumbs.dreamstime.com/z/special-offer-love-book-delete-user-icons-set-credit-card-sign-vector-simple-discounts-customer-feedback-remove-profile-loan-143090432.jpg"
-                      width="23%"
-                      height="35%"
-                      alt="123"
-                    ></img>
-                  </div>
-                </div>
-              </button>
-            </div>
-            <div className="grid-item">
-              <button className="btn notnav" type="button" value="Submit">
-                <div>
-                  <div>
-                    <h2>Edit or delete customers details</h2>
+                    <h2>Edit product details</h2>
                   </div>
                   <div>
                     <img
@@ -83,23 +99,6 @@ export default function ClerkDashboard() {
                       width="28%"
                       height="25%"
                       alt="1435"
-                    ></img>
-                  </div>
-                </div>
-              </button>
-            </div>
-            <div className="grid-item">
-              <button className="btn notnav" type="button" value="Submit">
-                <div>
-                  <div>
-                    <h2>Edit details of bank product</h2>
-                  </div>
-                  <div>
-                    <img
-                      src="https://booster.io/wp-content/uploads/custom-order-numbers-e1438361586475.png"
-                      width="21%"
-                      height="20%"
-                      alt="df324"
                     ></img>
                   </div>
                 </div>
@@ -130,7 +129,14 @@ export default function ClerkDashboard() {
               </button>
             </div>
             <div className="grid-item">
-              <button className="btn notnav" type="button" value="Submit">
+              <button
+                className="btn notnav"
+                type="button"
+                value="Submit"
+                onClick={() => {
+                  history.push("/queryList");
+                }}
+              >
                 <div>
                   <div>
                     <h2>Respond to the customer queries </h2>

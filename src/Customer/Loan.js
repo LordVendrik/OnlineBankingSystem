@@ -3,6 +3,8 @@ import { useHistory } from "react-router";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./Loan.css";
+import Nav from "../NavBar/Nav";
+import Sidebar from "../SideBar/Sidebar";
 
 export default function Loan() {
   const [loanData, setformData] = useState({
@@ -13,6 +15,20 @@ export default function Loan() {
   const [result, setResult] = useState("");
   const [products, setProducts] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    fetch("/checkCustomerType", {
+      method: "get",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          history.push("/login");
+        } else if (data.message !== "Customer") {
+          history.push("/wrongPage");
+        }
+      });
+  }, []);
 
   useEffect(() => {
     fetch("/requestProducts", {
@@ -49,6 +65,8 @@ export default function Loan() {
 
   return (
     <div className="Loan">
+      <Nav />
+      <Sidebar />
       <div className="pageborder">
         <div>
           <img

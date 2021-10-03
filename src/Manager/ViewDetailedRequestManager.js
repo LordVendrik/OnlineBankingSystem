@@ -1,12 +1,16 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
-import "./forms.css";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import Nav from "../NavBar/Nav";
+import Sidebar from "../SideBarManager/Sidebar";
+import hcbgImage from "./hcbg.jpg";
+import "./BankForm.css";
 
 export default function ViewDetailedRequestManager(props) {
   const id = props.match.params.id;
   const [details, setdetails] = useState({});
+  const [reason, setReason] = useState("");
   const history = useHistory();
   useEffect(() => {
     fetch("/checkCustomerType", {
@@ -36,7 +40,14 @@ export default function ViewDetailedRequestManager(props) {
   }, []);
 
   const DeclineAccount = (id) => {
-    fetch(`/ManagerDecline/${id}`, {
+    if (reason === "") {
+      document.getElementById("reason").style.border = "2px solid red";
+      document.getElementById("reason").scrollIntoView();
+      alert("Filling Reason is Mandatory to Delete the account request");
+      return;
+    }
+
+    fetch(`/ManagerDecline/${id}/${reason}`, {
       method: "get",
     })
       .then((res) => res.json())
@@ -48,6 +59,8 @@ export default function ViewDetailedRequestManager(props) {
           history.push("/approveAccountManager");
         }
       });
+
+    alert("work in progress dont click anywhere!!!! after pressing OK");
   };
 
   const ApproveAccount = (id) => {
@@ -63,20 +76,54 @@ export default function ViewDetailedRequestManager(props) {
           history.push("/approveAccountManager");
         }
       });
+    alert("work in progress dont click anywhere!!!! after pressing OK");
   };
 
   return (
-    <div>
+    <div className="ViewDetailedRequest">
       <Nav />
-      <div className="apply2">
-        <div className="form">
-          <header className="headres">
-            <h1 className="heading">Details</h1>
-          </header>
-          <div className="container-fluid">
-            <div className="row mt-4">
-              <div className="col-xl-6 col-md-12">
-                <div className="col-xl-6 col-md-12" id="pic">
+      <Sidebar />
+      <div
+        class="container"
+        class="bg_image"
+        style={{
+          backgroundImage: "url(" + hcbgImage + ")",
+          backgroundSize: "cover",
+        }}
+      >
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div className="form">
+              <h2 class="text-center"> DETAILS</h2>
+              <hr />
+
+              <legend>Personal Details</legend>
+
+              <fieldset>
+                <div class="form-group col-sm-12 col-md-8">
+                  <div class="row">
+                    <div class="form-group col-md-10">
+                      <label htmlFor="Account-Type">Account-Type</label>
+                      <div>{details.AccountType}</div>
+                      <br />
+                      <label className="labels">Request ID</label>
+                      <div>{details.request_id}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-10">
+                      <label htmlFor="first_name">First name</label>
+                      <div>{details.firstname}</div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div class="form-group  col-md-10">
+                      <label htmlFor="last_name">Last name</label>
+                      <div>{details.lastname}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-sm-12 col-md-3">
                   <div>
                     {details.photo !== undefined ? (
                       <img
@@ -89,11 +136,93 @@ export default function ViewDetailedRequestManager(props) {
                     )}
                   </div>
                   <br></br>
-                  <label>Photo</label>
+                  <label>photo</label>
                   <br></br>
                 </div>
-                <div className="col-xl-6 col-md-12 mt-5" id="pic1">
-                  <div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="UserName">UserName</label>
+                  <div>{details.Username}</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="confirm_password"> Password</label>
+                  <div>{details.password}</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor=" Email"> Email</label>
+                  <div>{details.Emailid}</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="Primary Mobile no">Primary Mobile no</label>
+                  <div>{details.phoneno}</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="Secondary Mobile no">
+                    Secondary Mobile no
+                  </label>
+                  <div>{details.Alternaivephoneno}</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="BirthDate">BirthDate</label>
+                  <div>{details.DOB}</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="AdharCardNo">AdharCardNo</label>
+                  <div>{details.aadharno}</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="Pan Card No">Pan Card No</label>
+                  <div>{details.pancardno}</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="Initial Amount"> Amount</label>
+                  <div>{details.Amount}</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="Gender">Gender</label>
+                  <div>{details.Gender}</div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Address Details</legend>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="House NO">House NO</label>
+                  <div>{details.Houseno}</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="District">District</label>
+                  <div>{details.District}</div> <div>{details.Colony}</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label htmlFor="Colony">Colony</label>
+                  <div>{details.Colony}</div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="State">State</label>
+                  <div>{details.State}</div>
+                </div>
+
+                <div class="form-group col-md-6"></div>
+                <div class="form-group col-md-6">
+                  <label htmlFor="Pincode">Pincode</label>
+                  <div>{details.pincode}</div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Uplodes</legend>
+
+                <div class="form-group col-md-6">
+                  <div className="row">
+                    <label>addhar</label>
                     {details.adharcardPhoto !== undefined ? (
                       <img
                         className="img"
@@ -104,238 +233,68 @@ export default function ViewDetailedRequestManager(props) {
                       "loading"
                     )}
                   </div>
-                  <br></br>
-                  <label className="p1">Aadhar</label>
-                  <br></br>
+                </div>
 
-                  <div></div>
+                <div class="form-group col-md-6">
+                  <div>
+                    <label> Signature</label>
+                    <br />
+                    {details.signaturephoto !== undefined ? (
+                      <img
+                        src={`/image/${details.signaturephoto}`}
+                        alt=""
+                        width="150px"
+                      ></img>
+                    ) : (
+                      "loading"
+                    )}
+                  </div>
                 </div>
-              </div>
+              </fieldset>
+              <hr />
+              <legend>Reason</legend>
 
-              <div className="col-xl-4 col-md-12">
-                <div className="col-xl-12 col-md-12" id="c2">
-                  <div className="row ">
-                    <div className="row">
-                      {" "}
-                      <div className="col">
-                        {" "}
-                        <label className="labels">Request ID:</label>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div>{details.request_id}</div>
-                    </div>
-                    <div className="col">
-                      <label className="labels" style={{ float: "left" }}>
-                        Accounttype:
-                      </label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div>{details.AccountType}</div>
-                  </div>
-                </div>
-                <div className="row">
-                  {" "}
-                  <div className="col">
-                    {" "}
-                    <label className="labels">FirstName:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.firstname}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">LastName:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.lastname}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">UserName:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.Username}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">Password:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.password}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">Email:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.Emailid}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels"> Primary Mobile no:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.phoneno}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels"> Secondary Mobile no:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.Alternaivephoneno}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels"> Birthdate:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.DOB}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels"> Addhaar card no:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.aadharno}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels"> Pan card no:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.pancardno}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels"> initial amount:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.initialAmount}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">Gender:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.Gender}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <label className="labels add">
-                  <h3>Address:</h3>
-                </label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-1"></div>
-
-              <div className="col-xl-4 col-md-12">
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">House NO:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.Houseno}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">Colony:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.Colony}</div>
-                </div>
-              </div>
-              <div className="col-2"></div>
-              <div className="col-xl-4 col-md-12">
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">District:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.District}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">State:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.State}</div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label className="labels">Pincode:</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div>{details.pincode}</div>
-                </div>
-              </div>
-              <div className="col-1"></div>
-            </div>
-
-            <div className="row mt-4">
-              <div className="col-xl-12 col-md-12 sig">
-                <div>
-                  {details.signaturephoto !== undefined ? (
-                    <img
-                      src={`/image/${details.signaturephoto}`}
-                      alt=""
-                      width="150px"
-                    ></img>
-                  ) : (
-                    "loading"
-                  )}
-                </div>
-                <br></br>
-                <label>Signature photo</label>
-                <br></br>
-                <div></div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col buttons">
-                <button
-                  className="btn btn-success mx-4"
-                  onClick={() => {
-                    ApproveAccount(details.request_id);
+              <div class="form-group">
+                <textarea
+                  className="form-control"
+                  id="reason"
+                  onChange={(e) => {
+                    setReason(e.target.value);
                   }}
-                >
-                  Approve
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    DeclineAccount(details.request_id);
-                  }}
-                >
-                  Decline
-                </button>
+                ></textarea>
               </div>
+
+              <fieldset>
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="checkbox"></div>
+                  </div>
+                </div>
+
+                <div class="form-group centered">
+                  <div class="col-md-12">
+                    <button
+                      type="submit"
+                      class="btn btn-primary mx-5"
+                      onClick={() => {
+                        ApproveAccount(details.request_id);
+                      }}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-danger mx-5"
+                      onClick={() => {
+                        DeclineAccount(details.request_id);
+                      }}
+                    >
+                      Decline
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
             </div>
-          </div>
-          <div>
-            <small className="vs">&copy; Application form for VCB,2021. </small>
           </div>
         </div>
       </div>

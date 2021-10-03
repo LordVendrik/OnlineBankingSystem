@@ -17,58 +17,64 @@ router.post("/login", (req, res) => {
         if (err || result.length <= 0) {
           return res.json({ error: "Wrong username or password" });
         } else {
-          if (
-            Username === result[0].Username &&
-            Password === result[0].Password
-          ) {
-            const user = result[0].Username;
+          bcrypt.compare(Password, result[0].Password, function (err, r) {
+            if (err) {
+              console.log(err);
+            }
 
-            const token = jwt.sign({ user }, "this is my secret", {
-              expiresIn: "30m",
-            });
+            if (r) {
+              console.log(result[0]);
+              if (Username === result[0].Username) {
+                const user = result[0].Username;
 
-            res.cookie("jwt", token, {
-              expires: new Date(Date.now() + 30 * 60 * 1000),
-              httpOnly: true,
-            });
+                const token = jwt.sign({ user }, "this is my secret", {
+                  expiresIn: "30m",
+                });
 
-            res.cookie("CustomerType", CustomerType, {
-              expires: new Date(Date.now() + 30 * 60 * 1000),
-              httpOnly: true,
-            });
+                res.cookie("jwt", token, {
+                  expires: new Date(Date.now() + 30 * 60 * 1000),
+                  httpOnly: true,
+                });
 
-            res.cookie("loggedin", "true", {
-              expires: new Date(Date.now() + 30 * 60 * 1000),
-              httpOnly: false,
-            });
+                res.cookie("CustomerType", CustomerType, {
+                  expires: new Date(Date.now() + 30 * 60 * 1000),
+                  httpOnly: true,
+                });
 
-            const accno = result[0].Accountno;
+                res.cookie("loggedin", "true", {
+                  expires: new Date(Date.now() + 30 * 60 * 1000),
+                  httpOnly: false,
+                });
 
-            db.query(
-              `select * from customeraccounts where accountno = ${accno}`,
-              (err, data) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  res.json({
-                    User: {
-                      Accountno: data[0].Accountno,
-                      Username: Username,
-                      firstName: data[0].firstname,
-                      lastName: data[0].lastname,
-                      Amount: data[0].Amount,
-                      Aadharno: data[0].aadharno,
-                      pancardno: data[0].pancardno,
-                      CustomerType: CustomerType,
-                      AccountType: data[0].AccountType,
-                    },
-                  });
-                }
+                const accno = result[0].accountno;
+
+                db.query(
+                  `select * from customeraccounts where Accountno = ${accno}`,
+                  (err, data) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.json({
+                        User: {
+                          Accountno: data[0].Accountno,
+                          Username: Username,
+                          firstName: data[0].firstname,
+                          lastName: data[0].lastname,
+                          Amount: data[0].Amount,
+                          Aadharno: data[0].aadharno,
+                          pancardno: data[0].pancardno,
+                          CustomerType: CustomerType,
+                          AccountType: data[0].AccountType,
+                        },
+                      });
+                    }
+                  }
+                );
+              } else {
+                res.json({ error: "Wrong username or password" });
               }
-            );
-          } else {
-            res.json({ error: "Wrong username or password" });
-          }
+            }
+          });
         }
       }
     );
@@ -79,28 +85,38 @@ router.post("/login", (req, res) => {
         if (err || result.length <= 0) {
           return res.json({ error: "Wrong username or password" });
         } else {
-          if (
-            Username === result[0].Username &&
-            Password === result[0].Password
-          ) {
-            const user = result[0].Username;
+          bcrypt.compare(Password, result[0].Password, function (err, r) {
+            if (err) {
+              console.log(err);
+            }
 
-            const token = jwt.sign({ user }, "this is my secret");
+            if (r) {
+              if (
+                Username === result[0].Username &&
+                CustomerType === result[0].Designation
+              ) {
+                const user = result[0].Username;
 
-            res.cookie("jwt", token, {
-              httpOnly: true,
-            });
+                const token = jwt.sign({ user }, "this is my secret");
 
-            res.cookie("CustomerType", CustomerType, {
-              httpOnly: true,
-            });
+                res.cookie("jwt", token, {
+                  httpOnly: true,
+                });
 
-            res.cookie("loggedin", "true");
+                res.cookie("CustomerType", CustomerType, {
+                  httpOnly: true,
+                });
 
-            res.json({ User: { CustomerType: CustomerType } });
-          } else {
-            res.json({ error: "Wrong username or password" });
-          }
+                res.cookie("loggedin", "true");
+
+                res.json({ User: { CustomerType: CustomerType } });
+              } else {
+                res.json({
+                  error: "Wrong username or password or Designation",
+                });
+              }
+            }
+          });
         }
       }
     );

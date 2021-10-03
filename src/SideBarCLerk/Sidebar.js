@@ -40,11 +40,9 @@ export default function Sidebar() {
         </a>
         <Link to="/clerkDashboard">Dashboard</Link>
         <Link to="/approveAccount">Approve Accounts</Link>
-        <a href="#c">Edit/Delete Customer Details</a>
         <a href="#1">Add/Edit Bank Products</a>
         <Link to="/approveTransactions">Approve Transactions</Link>
-        <a href="#c">Approve, Edit, Delete Loan and Card Details</a>
-        <a href="#d">Respond to Query</a>
+        <Link to="queryList">Respond to Query</Link>
       </div>
     </div>
   );

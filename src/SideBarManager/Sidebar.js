@@ -40,11 +40,11 @@ export default function Sidebar() {
         </a>
         <Link to="/managerDashboard">Dashboard</Link>
         <Link to="/approveAccountManager">Approve New Accounts</Link>
-        <Link to="/ManagerLoanList">Approve load/Cards Requests</Link>
-        <Link to="/">View/Delete Customer Account</Link>
-        <a href="#b">Create/Edit/Delete Details of clerk</a>
-        <a href="#c">Watch All Transactions</a>
-        <a href="#d">Send Notifications</a>
+        <Link to="/ManagerLoanList">Approve loan Requests</Link>
+        <Link to="/managerDelete">Delete Customer Account</Link>
+        <Link to="/watchTransactions">Watch All Transactions</Link>
+        <Link to="/sendNotification">Send Notifications</Link>
+        <Link to="/addClerk">Add Clerk</Link>
       </div>
     </div>
   );

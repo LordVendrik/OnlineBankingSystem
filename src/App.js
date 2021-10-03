@@ -6,7 +6,6 @@ import CustomerDashboard from "./Customer/CustomerDashboard";
 import ClerkDashboard from "./Clerk/ClerkDashboard";
 import ManagerDashboard from "./Manager/ManagerDashboard";
 import PageNotfound404 from "./PageNotfound404";
-import Bform from "./bform/Bform";
 import Approve from "./Clerk/Approve";
 import { initialState, reducer } from "./Reducer/reducer";
 import ViewDetailedRequestClerk from "./Clerk/ViewDetailedRequestClerk";
@@ -15,9 +14,24 @@ import ApproveAccount from "./Manager/ApproveAccount";
 import FundTransfer from "./Customer/FundTransfer";
 import ApproveTransactions from "./Clerk/ApproveTransactions";
 import ViewDetailedTransactionRequest from "./Clerk/ViewDetailedTransactionRequest";
-import Loan from "./Customer/Loan";
+import LoanForm from "./Customer/LoanForm";
 import ManagerLoanList from "./Manager/ManagerLoanList";
 import LoanView from "./Manager/LoanView";
+import BankForm from "./bform/BankForm";
+import SendNotification from "./Manager/SendNotification";
+import CustomerqueryDisplay from "./Customer/CustomequeryDisplay";
+import Querryclerk from "./Clerk/Querryclerk";
+import Clerkresponseq from "./Clerk/Clerkresponseq";
+import DeleteAccounts from "./Manager/DeleteAccounts";
+import DeleteViewDetailedRequestManager from "./Manager/deleteViewDetailedRequestManager";
+import Transaction from "./Manager/Transaction";
+import CustomerCorrection from "./Customer/CustomerCorrection";
+import CustomerTransaction from "./Customer/customerTransaction";
+import UProduct from "./Clerk/UProduct";
+import Clerkinformation from "./Manager/Clerkinformation";
+import LoginUi from "./LoginUI/LoginUi";
+import Aboutus from "./Aboutus";
+import Termsconditions from "./Termsconditions";
 
 export const userContext = createContext();
 
@@ -46,7 +60,7 @@ const Routing = () => {
   return (
     <Switch>
       <Route path="/login">
-        <MainLogin />
+        <LoginUi />
       </Route>
       <Route exact path="/customerDashboard">
         <CustomerDashboard />
@@ -61,7 +75,7 @@ const Routing = () => {
         <PageNotfound404 />
       </Route>
       <Route exact path="/Application">
-        <Bform />
+        <BankForm />
       </Route>
       <Route exact path="/approveAccount">
         <Approve />
@@ -76,14 +90,52 @@ const Routing = () => {
         <FundTransfer />
       </Route>
       <Route exact path="/CustomerLoanRequest">
-        <Loan />
+        <LoanForm />
+      </Route>
+      <Route exact path="/sendNotification">
+        <SendNotification />
       </Route>
       <Route exact path="/ManagerLoanList">
         <ManagerLoanList />
       </Route>
+      <Route exact path="/queryHistory">
+        <CustomerqueryDisplay />
+      </Route>
+      <Route exact path="/queryList">
+        <Querryclerk />
+      </Route>
+      <Route exact path="/managerDelete">
+        <DeleteAccounts />
+      </Route>
+      <Route exact path="/watchTransactions">
+        <Transaction />
+      </Route>
+      <Route exact path="/customerCorrection">
+        <CustomerCorrection />
+      </Route>
+      <Route exact path="/customerTransaction">
+        <CustomerTransaction />
+      </Route>
+      <Route exact path="/editProduct">
+        <UProduct />
+      </Route>
+      <Route exact path="/addClerk">
+        <Clerkinformation />
+      </Route>
+      <Route exact path="/aboutUs">
+        <Aboutus />
+      </Route>
+      <Route exact path="/terms">
+        <Termsconditions />
+      </Route>
+      <Route path="/AnswerQuerryclerk/:id" component={Clerkresponseq}></Route>
       <Route
         path="/approveAccount/:id"
         component={ViewDetailedRequestClerk}
+      ></Route>
+      <Route
+        path="/deleteAccountManager/:id"
+        component={DeleteViewDetailedRequestManager}
       ></Route>
       <Route
         path="/approveAccountManager/:id"

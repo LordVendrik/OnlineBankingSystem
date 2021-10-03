@@ -39,12 +39,11 @@ export default function Sidebar() {
           ×
         </a>
         <Link to="/customerDashboard">Dashboard</Link>
-        <a href="#b">Watch Transactions History</a>
+        <Link to="/customerTransaction">Watch Transactions History</Link>
         <Link to="/CustomerLoanRequest">Apply for Loan</Link>
         <Link to="/transferFund">Transfer Money</Link>
-        <a href="#b">Notifications</a>
-        <a href="#c">Apply For Corrections</a>
-        <a href="#d">Send Query</a>
+        <Link to="/customerCorrection">Apply For Corrections</Link>
+        <Link to="/queryHistory">Watch Query History</Link>
       </div>
     </div>
   );

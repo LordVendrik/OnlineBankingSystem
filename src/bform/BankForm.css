@@ -1,0 +1,88 @@
+.Bankform form * {
+  color: white;
+  border-radius: 0 !important;
+}
+
+.Bankform form > fieldset > legend {
+  font-size: 120%;
+}
+.Bankform .block11 {
+  width: 175px;
+  height: 175px;
+}
+
+.Bankform .form {
+  background-color: #ffffff;
+  border: 1px solid black;
+  margin: 0px auto;
+  font-family: Raleway;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.Bankform .block12 {
+  width: 250px;
+  height: 50px;
+}
+
+.Bankform {
+  z-index: 0;
+}
+
+.modal2 {
+  width: 30%;
+  height: 50vh;
+  position: absolute;
+  z-index: 2;
+  top: 20%;
+  right: 35%;
+}
+
+.redirectbutton {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.filter {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.295);
+}
+
+@media screen and (max-width: 900px) {
+  .Bankform .block12 {
+    margin-right: 2rem;
+    width: 7rem;
+  }
+
+  .modal2 {
+    width: 50%;
+    height: 50vh;
+    position: absolute;
+    z-index: 2;
+    top: 20%;
+    right: 25%;
+  }
+
+  .filter {
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    height: 110vh;
+    background-color: rgba(0, 0, 0, 0.295);
+  }
+
+  .Bankform .form {
+    border: 1px solid black;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .Bankform .block11 {
+    width: 100px;
+    height: 100px;
+  }
+}

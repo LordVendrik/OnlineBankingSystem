@@ -19,17 +19,32 @@ router.post(
       date: req.body.date,
       time: req.body.time,
       transferfrom: req.body.transferfrom,
-      BankType: req.body.BankType,
     };
 
     db.query(
-      `insert into transferrequest set ?`,
-      transaction,
+      `select * from customeraccounts where Accountno = ${req.body.beneficiaryaccountnumber}`,
       (err, result) => {
         if (err) {
-          return res.json({ error: err });
+          console.log(err);
         } else {
-          res.json({ message: "successfuly requested" });
+          if (result.length === 0) {
+            return res.json({
+              error: "Customer with this Account Number do not exists",
+            });
+          } else {
+            db.query(
+              `insert into transferrequest set ?`,
+              transaction,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  return res.json({ error: err });
+                } else {
+                  res.json({ message: "successfuly requested" });
+                }
+              }
+            );
+          }
         }
       }
     );
